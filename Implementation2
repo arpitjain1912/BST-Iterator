@@ -1,0 +1,34 @@
+stack<TreeNode*>s;
+BSTIterator::BSTIterator(TreeNode *root) {
+while(root!=NULL)
+{
+s.push(root);
+root=root->left;
+}
+}
+
+/** @return whether we have a next smallest number */
+bool BSTIterator::hasNext() {
+if(!s.empty())
+return true;
+else
+return false;
+}
+
+/** @return the next smallest number /
+int BSTIterator::next() {
+TreeNode temp=s.top();
+s.pop();
+int x=temp->val;
+if(temp->right!=NULL)
+{ TreeNode* temp1=temp->right->left;
+s.push(temp->right);
+while(temp1!=NULL)
+{
+s.push(temp1);
+temp1=temp1->left;
+}
+}
+
+return x;
+}
